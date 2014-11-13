@@ -1,7 +1,6 @@
-package main.java.hotelreservation;
+package java.hotelreservation;
 
-import main.util.dForW;
-
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -11,28 +10,28 @@ import java.util.List;
  */
 public class Hotel {
     private String hotelName;
-    private int rating;//评级
-    private double weekdayPriceForRegularCustomer;//工作日_正常_价格
-    private double weekdayPriceForRewardsCustomer;//工作日_会员_价格
-    private double weekendPriceForRegularCustomer;//周末_正常_价格
-    private double weekendPriceForRewardsCustomer;//周末_会员_价格
+    private int rating;
+    private double weekdayPriceForRegularCustomer;
+    private double weekdayPriceForRewardsCustomer;
+    private double weekendPriceForRegularCustomer;
+    private double weekendPriceForRewardsCustomer;
 
     public Hotel(String hotelName, int rating, double weekdayPriceForRegularCustomer, double weekdayPriceForRewardsCustomer, double weekendPriceForRegularCustomer, double weekendPriceForRewardsCustomer) {
         this.hotelName = hotelName;
         this.rating = rating;
         this.weekdayPriceForRegularCustomer = weekdayPriceForRegularCustomer;
         this.weekdayPriceForRewardsCustomer = weekdayPriceForRewardsCustomer;
-        this.weekdayPriceForRegularCustomer = weekdayPriceForRegularCustomer;
+        this.weekendPriceForRegularCustomer = weekendPriceForRegularCustomer;
         this.weekendPriceForRewardsCustomer = weekendPriceForRewardsCustomer;
     }
 
 
-    public Double  calculatePrice(List<String> dateList, double customerType) throws Exception {
+    public Double  calculatePrice(List<Date> dateList, double customerType) throws Exception {
         double totalPrice = 0;
         double weekdayPrice = customerType == 1 ? weekdayPriceForRewardsCustomer : weekdayPriceForRegularCustomer;
-        double weekendPrice = customerType == 0 ? weekendPriceForRegularCustomer : weekendPriceForRewardsCustomer;
-        for (String date : dateList) {
-            if (dForW.dayForWeek(date) > 5) {
+        double weekendPrice = customerType == 1 ? weekendPriceForRewardsCustomer : weekendPriceForRegularCustomer;
+        for (Date date : dateList) {
+            if (getDay(date) > 5) {
                 totalPrice += weekendPrice;
             } else {
                 totalPrice += weekdayPrice;
@@ -82,4 +81,5 @@ public class Hotel {
     public String getHotelName() {
         return hotelName;
     }
+
 }
