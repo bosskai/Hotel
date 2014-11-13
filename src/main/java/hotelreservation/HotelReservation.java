@@ -26,14 +26,14 @@ public class HotelReservation {
                     e.printStackTrace();
                 }
                 if (totalPrice1 < totalPrice2) {
-                    return 1;
-                } else if (totalPrice1 > totalPrice2) {
                     return -1;
+                } else if (totalPrice1 > totalPrice2) {
+                    return 1;
                 } else {
                     if (hotel1.getRating() > hotel2.getRating()) {
-                        return 1;
-                    } else {
                         return -1;
+                    } else {
+                        return 1;
                     }
                 }
             }

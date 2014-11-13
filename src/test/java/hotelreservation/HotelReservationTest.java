@@ -3,6 +3,7 @@ package hotelreservation;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertTrue;
@@ -12,13 +13,14 @@ import static org.junit.Assert.assertTrue;
  */
 public class HotelReservationTest {
 
-    List<Hotel> hotelList;
+    protected List<Hotel> hotelList;
 
     @Before
     public void setUp() {
         Hotel lakeWood = new Hotel("LakeWood", 3, 110, 80, 90, 80);
         Hotel bridgeWood = new Hotel("BridgeWood", 4, 160, 110, 60, 50);
-        Hotel ridgeWood = new Hotel("RidgeWood", 5, 160, 110, 60, 50);
+        Hotel ridgeWood = new Hotel("RidgeWood", 5, 220, 100, 150, 40);
+        hotelList = new ArrayList<Hotel>();
         hotelList.add(lakeWood);
         hotelList.add(bridgeWood);
         hotelList.add(ridgeWood);
