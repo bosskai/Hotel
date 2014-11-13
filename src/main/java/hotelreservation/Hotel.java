@@ -1,6 +1,5 @@
-package java.hotelreservation;
+package hotelreservation;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -24,7 +23,6 @@ public class Hotel {
         this.weekendPriceForRegularCustomer = weekendPriceForRegularCustomer;
         this.weekendPriceForRewardsCustomer = weekendPriceForRewardsCustomer;
     }
-
 
     public Double  calculatePrice(List<Date> dateList, String customerType) throws Exception {
         double totalPrice = 0;
@@ -52,31 +50,9 @@ public class Hotel {
         return dayForWeek;
     }
 
-
     public int getRating() {
         return rating;
     }
-
-
-    public double getWeekdayPriceForRegularCustomer() {
-        return weekdayPriceForRegularCustomer;
-    }
-
-
-    public double getWeekdayPriceForRewardsCustomer() {
-        return weekdayPriceForRewardsCustomer;
-    }
-
-
-    public double getWeekendPriceForRegularCustomer() {
-        return weekendPriceForRegularCustomer;
-    }
-
-
-    public double getWeekendPriceForRewardsCustomer() {
-        return weekendPriceForRewardsCustomer;
-    }
-
 
     public String getHotelName() {
         return hotelName;

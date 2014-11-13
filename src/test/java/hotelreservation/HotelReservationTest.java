@@ -1,7 +1,48 @@
-package test.hotelreservation;
+package hotelreservation;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import java.util.List;
+
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by bosskai on 2014/11/13.
  */
 public class HotelReservationTest {
+
+    List<Hotel> hotelList;
+
+    @Before
+    public void setUp() {
+        Hotel lakeWood = new Hotel("LakeWood", 3, 110, 80, 90, 80);
+        Hotel bridgeWood = new Hotel("BridgeWood", 4, 160, 110, 60, 50);
+        Hotel ridgeWood = new Hotel("RidgeWood", 5, 160, 110, 60, 50);
+        hotelList.add(lakeWood);
+        hotelList.add(bridgeWood);
+        hotelList.add(ridgeWood);
+    }
+
+    @Test
+    public void should_answer_lakewood() throws Exception {
+        String dateString = "2009-03-16,2009-03-17,2009-03-18";
+        String expect = "LakeWood";
+        assertTrue(expect.equalsIgnoreCase(new HotelReservation().bestChoice(hotelList, dateString, "regular")));
+    }
+
+    @Test
+    public void should_answer_bridgewood() throws Exception {
+        String dateString = "2009-03-20,2009-03-21,2009-03-22";
+        String expect = "BridgeWood";
+        assertTrue(expect.equalsIgnoreCase(new HotelReservation().bestChoice(hotelList, dateString, "regular")));
+    }
+
+    @Test
+    public void should_answer_ridgewood() throws Exception {
+        String dateString = "2009-03-26,2009-03-27,2009-03-28";
+        String expect = "RidgeWood";
+        assertTrue(expect.equalsIgnoreCase(new HotelReservation().bestChoice(hotelList, dateString, "rewards")));
+    }
+
 }

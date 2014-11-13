@@ -1,6 +1,5 @@
-package java.hotelreservation;
+package hotelreservation;
 
-import java.hotelreservation.Hotel;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
