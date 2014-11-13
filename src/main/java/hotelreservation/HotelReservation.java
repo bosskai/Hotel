@@ -9,17 +9,10 @@ import java.util.List;
  * Created by bosskai on 2014/11/13.
  */
 public class HotelReservation {
-    public String bestChoice(List<Hotel> hotelList, final List<String> date, final int customerType) throws Exception {
-        double lakeWoodPrice = 0;
-        double bridgeWoodPrice = 0;
-        double ridgeWoodPrice = 0;
-        List list = new ArrayList();
-        for (Hotel hotel : hotelList) {
-            hotel.getHotelName();
-            hotel.getRating();
-            hotel.calculatePrice(date, customerType);
+    public String bestChoice(List<Hotel> hotelList, String date, final int customerType) throws Exception {
+        
+        List<Date> listDate = parseDate(date);
 
-        }
         Collections.sort(hotelList,new Comparator(){
 //            @Override
             public int compare(Hotel o1, Hotel o2) throws Exception {
@@ -31,4 +24,10 @@ public class HotelReservation {
 
           return "";
     }
+
+    private List<Date> parseDate(String date) {
+        List<Date> listDate = new ArrayList<Date>();
+        return listDate;
+    }
+
 }
