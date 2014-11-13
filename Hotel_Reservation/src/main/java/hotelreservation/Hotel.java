@@ -27,7 +27,7 @@ public class Hotel {
     }
 
 
-    public double  calculatePrice(List<String> dateList, double customerType) throws Exception {
+    public Double  calculatePrice(List<String> dateList, double customerType) throws Exception {
         double totalPrice = 0;
         double weekdayPrice = customerType == 1 ? weekdayPriceForRewardsCustomer : weekdayPriceForRegularCustomer;
         double weekendPrice = customerType == 0 ? weekendPriceForRegularCustomer : weekendPriceForRewardsCustomer;
