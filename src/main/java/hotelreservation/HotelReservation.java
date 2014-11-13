@@ -26,9 +26,9 @@ public class HotelReservation {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                if (totalPrice1 > totalPrice2) {
+                if (totalPrice1 < totalPrice2) {
                     return 1;
-                } else if (totalPrice1 < totalPrice2) {
+                } else if (totalPrice1 > totalPrice2) {
                     return -1;
                 } else {
                     if (hotel1.getRating() > hotel2.getRating()) {
