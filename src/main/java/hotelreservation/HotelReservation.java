@@ -1,32 +1,55 @@
-package main.java.hotelreservation;
+package java.hotelreservation;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.hotelreservation.Hotel;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Created by bosskai on 2014/11/13.
  */
 public class HotelReservation {
-    public String bestChoice(List<Hotel> hotelList, String date, final int customerType) throws Exception {
-        
-        List<Date> listDate = parseDate(date);
+    public String bestChoice(List<Hotel> hotelList, final String date, final String customerType) throws Exception {
 
-        Collections.sort(hotelList,new Comparator(){
-//            @Override
-            public int compare(Hotel o1, Hotel o2) throws Exception {
-                int i = o1.calculatePrice(date, customerType).compareTo(o2.calculatePrice(date, customerType));
-//                arg0.getRating().compareTo(arg0.getRating());
-                return 0;
+        final List<Date> listDate = parseDate(date);
+
+        Collections.sort(hotelList, new Comparator() {
+            @Override
+            public int compare(Object o1, Object o2) {
+                Hotel hotel1 = (Hotel) o1;
+                Hotel hotel2 = (Hotel) o2;
+                Double totalPrice1 = null;
+                Double totalPrice2 = null;
+                try {
+                    totalPrice1 = hotel1.calculatePrice(listDate, customerType);
+                    totalPrice2 = hotel2.calculatePrice(listDate, customerType);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                if (totalPrice1 > totalPrice2) {
+                    return 1;
+                } else if (totalPrice1 < totalPrice2) {
+                    return -1;
+                } else {
+                    if (hotel1.getRating() > hotel2.getRating()) {
+                        return 1;
+                    } else {
+                        return -1;
+                    }
+                }
             }
         });
 
-          return "";
+        return hotelList.get(0).getHotelName();
     }
 
-    private List<Date> parseDate(String date) {
+    private List<Date> parseDate(String date) throws ParseException {
         List<Date> listDate = new ArrayList<Date>();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        String[] dateArray = date.split(",");
+        for (String dateString : dateArray) {
+            listDate.add(format.parse(dateString));
+        }
         return listDate;
     }
 

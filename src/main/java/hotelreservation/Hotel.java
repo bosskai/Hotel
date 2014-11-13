@@ -26,10 +26,10 @@ public class Hotel {
     }
 
 
-    public Double  calculatePrice(List<Date> dateList, double customerType) throws Exception {
+    public Double  calculatePrice(List<Date> dateList, String customerType) throws Exception {
         double totalPrice = 0;
-        double weekdayPrice = customerType == 1 ? weekdayPriceForRewardsCustomer : weekdayPriceForRegularCustomer;
-        double weekendPrice = customerType == 1 ? weekendPriceForRewardsCustomer : weekendPriceForRegularCustomer;
+        double weekdayPrice = customerType.equalsIgnoreCase("rewards") ? weekdayPriceForRewardsCustomer : weekdayPriceForRegularCustomer;
+        double weekendPrice = customerType.equalsIgnoreCase("rewards") ? weekendPriceForRewardsCustomer : weekendPriceForRegularCustomer;
         for (Date date : dateList) {
             if (getDay(date) > 5) {
                 totalPrice += weekendPrice;
