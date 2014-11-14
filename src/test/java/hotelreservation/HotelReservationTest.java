@@ -15,7 +15,6 @@ import static org.junit.Assert.assertTrue;
 public class HotelReservationTest {
 
     protected List<Hotel> hotelList;
-    protected String specialDate;
 
     @Before
     public void setUp() {
@@ -26,7 +25,6 @@ public class HotelReservationTest {
         hotelList.add(lakeWood);
         hotelList.add(bridgeWood);
         hotelList.add(ridgeWood);
-        specialDate = "2009-03-16,2009-03-27";
 
     }
 
@@ -34,21 +32,21 @@ public class HotelReservationTest {
     public void should_answer_lakewood() throws Exception {
         String dateString = "2009-03-16,2009-03-17,2009-03-18";
         String expect = "LakeWood";
-        assertTrue(expect.equalsIgnoreCase(new HotelReservation().bestChoice(hotelList, dateString, "regular", specialDate)));
+        assertTrue(expect.equalsIgnoreCase(new HotelReservation().bestChoice(hotelList, dateString, "regular")));
     }
 
     @Test
     public void should_answer_bridgewood() throws Exception {
         String dateString = "2009-03-20,2009-03-21,2009-03-22";
         String expect = "BridgeWood";
-        assertTrue(expect.equalsIgnoreCase(new HotelReservation().bestChoice(hotelList, dateString, "regular", specialDate)));
+        assertTrue(expect.equalsIgnoreCase(new HotelReservation().bestChoice(hotelList, dateString, "regular")));
     }
 
     @Test
     public void should_answer_ridgewood() throws Exception {
         String dateString = "2009-03-26,2009-03-27,2009-03-28";
-        String expect = "LakeWood";
-        assertTrue(expect.equalsIgnoreCase(new HotelReservation().bestChoice(hotelList, dateString, "rewards", specialDate)));
+        String expect = "RidgeWood";
+        assertTrue(expect.equalsIgnoreCase(new HotelReservation().bestChoice(hotelList, dateString, "rewards")));
     }
 
 }
