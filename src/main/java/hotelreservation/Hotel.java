@@ -24,7 +24,7 @@ public class Hotel {
         this.weekendPriceForRewardsCustomer = weekendPriceForRewardsCustomer;
     }
 
-    public Double  calculatePrice(List<Date> dateList, String customerType) throws Exception {
+    public Double calculatePrice(List<Date> dateList, String customerType) throws Exception {
         double totalPrice = 0;
         double weekdayPrice;
         double weekendPrice;
@@ -36,7 +36,7 @@ public class Hotel {
             weekendPrice = weekendPriceForRegularCustomer;
         }
         for (Date date : dateList) {
-            if (getDay(date) > 5) {
+            if (isWeekend(date)) {
                 totalPrice += weekendPrice;
             } else {
                 totalPrice += weekdayPrice;
@@ -45,16 +45,16 @@ public class Hotel {
         return totalPrice;
     }
 
-    private int getDay(Date date) throws Exception {
+    private boolean isWeekend(Date date) throws Exception {
         Calendar c = Calendar.getInstance();
         c.setTime(date);
-        int dayForWeek = 0;
+        int dayForWeek;
         if (c.get(Calendar.DAY_OF_WEEK) == 1) {
             dayForWeek = 7;
         } else {
             dayForWeek = c.get(Calendar.DAY_OF_WEEK) - 1;
         }
-        return dayForWeek;
+        return dayForWeek > 5;
     }
 
     public int getRating() {
