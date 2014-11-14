@@ -8,9 +8,10 @@ import java.util.*;
  * Created by bosskai on 2014/11/13.
  */
 public class HotelReservation {
-    public String bestChoice(List<Hotel> hotelList, final String date, final String customerType) throws Exception {
+    public String bestChoice(List<Hotel> hotelList, final String date, final String customerType, final String specialDate) throws Exception {
 
         final List<Date> listDate = parseDate(date);
+        final List<Date> listSpecialDate = parseDate(specialDate);
 
         Collections.sort(hotelList, new Comparator() {
             @Override
@@ -20,8 +21,8 @@ public class HotelReservation {
                 Double totalPrice1 = null;
                 Double totalPrice2 = null;
                 try {
-                    totalPrice1 = hotel1.calculatePrice(listDate, customerType);
-                    totalPrice2 = hotel2.calculatePrice(listDate, customerType);
+                    totalPrice1 = hotel1.calculatePrice(listDate, customerType, listSpecialDate);
+                    totalPrice2 = hotel2.calculatePrice(listDate, customerType, listSpecialDate);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
