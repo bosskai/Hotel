@@ -42,7 +42,7 @@ public class HotelReservation {
         return hotelList.get(0).getHotelName();
     }
 
-    private List<Date> parseDate(String date) throws ParseException {
+    protected List<Date> parseDate(String date) throws ParseException {
         List<Date> listDate = new ArrayList<Date>();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         String[] dateArray = date.split(",");

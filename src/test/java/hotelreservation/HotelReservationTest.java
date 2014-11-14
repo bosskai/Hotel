@@ -50,17 +50,26 @@ public class HotelReservationTest {
     }
 
     @Test
-    public void special_date_should_answer_ridgewood() throws Exception {
-        Hotel lakeWood = new Hotel("LakeWood", 3, 110, 80, 90, 80, "2009-03-26");
-        Hotel bridgeWood = new Hotel("BridgeWood", 4, 160, 110, 60, 50, "2009-03-26");
-        Hotel ridgeWood = new Hotel("RidgeWood", 5, 220, 100, 150, 40, "2009-03-26");
-        hotelList = new ArrayList<Hotel>();
-        hotelList.add(lakeWood);
-        hotelList.add(bridgeWood);
-        hotelList.add(ridgeWood);
-
-        String dateString = "2009-03-26,2009-03-27,2009-03-28";
-        String expect = "LakeWood";
-        assertTrue(expect.equalsIgnoreCase(new HotelReservation().bestChoice(hotelList, dateString, "rewards")));
+    public void total_price_should_be_regular_when_date_is_out_of_valid() throws Exception {
+        String dateString = "2009-03-26";
+        Hotel lakeWood = new Hotel("LakeWood", 3, 110, 80, 90, 80, "03-01", "03-20");
+        Double expect = Double.valueOf(110);
+        assertTrue(expect == lakeWood.calculatePrice(new HotelReservation().parseDate(dateString), "rewards"));
     }
+
+//    @Test
+//    public void special_date_should_answer_ridgewood() throws Exception {
+//        Hotel lakeWood = new Hotel("LakeWood", 3, 110, 80, 90, 80, "2009-03-26");
+//        Hotel bridgeWood = new Hotel("BridgeWood", 4, 160, 110, 60, 50, "2009-03-26");
+//        Hotel ridgeWood = new Hotel("RidgeWood", 5, 220, 100, 150, 40, "2009-03-26");
+//        hotelList = new ArrayList<Hotel>();
+//        hotelList.add(lakeWood);
+//        hotelList.add(bridgeWood);
+//        hotelList.add(ridgeWood);
+//
+//        String dateString = "2009-03-26,2009-03-27,2009-03-28";
+//        String expect = "LakeWood";
+//        assertTrue(expect.equalsIgnoreCase(new HotelReservation().bestChoice(hotelList, dateString, "rewards")));
+//    }
+
 }
