@@ -2,7 +2,8 @@
 Thumbs.db
 ehthumbs.db
 .idea/
-
+build/
+.gradle/
 # Folder config file
 Desktop.ini
 
@@ -43,3 +44,7 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
+
+.idea/gradle.xml
+
+.idea/uiDesigner.xml
