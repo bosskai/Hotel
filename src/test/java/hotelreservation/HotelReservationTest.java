@@ -15,6 +15,7 @@ import static org.junit.Assert.assertTrue;
 public class HotelReservationTest {
 
     protected List<Hotel> hotelList;
+    protected HotelReservation hotelReservation = new HotelReservation();
 
     @Before
     public void setUp() {
@@ -25,28 +26,27 @@ public class HotelReservationTest {
         hotelList.add(lakeWood);
         hotelList.add(bridgeWood);
         hotelList.add(ridgeWood);
-
     }
 
     @Test
     public void should_answer_lakewood() throws Exception {
         String dateString = "2009-03-16,2009-03-17,2009-03-18";
         String expect = "LakeWood";
-        assertTrue(expect.equalsIgnoreCase(new HotelReservation().bestChoice(hotelList, dateString, "regular")));
+        assertTrue(expect.equalsIgnoreCase(hotelReservation.bestChoice(hotelList, dateString, "regular")));
     }
 
     @Test
     public void should_answer_bridgewood() throws Exception {
         String dateString = "2009-03-20,2009-03-21,2009-03-22";
         String expect = "BridgeWood";
-        assertTrue(expect.equalsIgnoreCase(new HotelReservation().bestChoice(hotelList, dateString, "regular")));
+        assertTrue(expect.equalsIgnoreCase(hotelReservation.bestChoice(hotelList, dateString, "regular")));
     }
 
     @Test
     public void should_answer_ridgewood() throws Exception {
         String dateString = "2009-03-26,2009-03-27,2009-03-28";
         String expect = "RidgeWood";
-        assertTrue(expect.equalsIgnoreCase(new HotelReservation().bestChoice(hotelList, dateString, "rewards")));
+        assertTrue(expect.equalsIgnoreCase(hotelReservation.bestChoice(hotelList, dateString, "rewards")));
     }
 
     @Test
@@ -54,7 +54,7 @@ public class HotelReservationTest {
         String dateString = "2009-03-01";
         Hotel lakeWood = new Hotel("LakeWood", 3, 110, 80, 90, 80, "03-01", "03-20");
         Double expect = Double.valueOf(110);
-        assertTrue(expect == lakeWood.calculatePrice(new HotelReservation().parseDate(dateString), "rewards"));
+        assertTrue(expect == lakeWood.calculatePrice(hotelReservation.parseDate(dateString), "rewards"));
     }
 
 //    @Test
@@ -69,7 +69,7 @@ public class HotelReservationTest {
 //
 //        String dateString = "2009-03-26,2009-03-27,2009-03-28";
 //        String expect = "LakeWood";
-//        assertTrue(expect.equalsIgnoreCase(new HotelReservation().bestChoice(hotelList, dateString, "rewards")));
+//        assertTrue(expect.equalsIgnoreCase(hotelReservation.bestChoice(hotelList, dateString, "rewards")));
 //    }
 
 }

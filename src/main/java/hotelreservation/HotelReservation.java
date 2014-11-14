@@ -8,6 +8,7 @@ import java.util.*;
  * Created by bosskai on 2014/11/13.
  */
 public class HotelReservation {
+
     public String bestChoice(List<Hotel> hotelList, final String date, final String customerType) throws Exception {
 
         final List<Date> listDate = parseDate(date);
