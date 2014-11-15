@@ -52,13 +52,10 @@ public class Hotel {
                 weekdayPrice = weekdayPriceForRegularCustomer;
                 weekendPrice = weekendPriceForRegularCustomer;
             }
-
             if (isWeekend(date)) {
-                if (isSpecialDate(date)) {
                     totalPrice += weekendPrice;
-                } else {
-                    totalPrice += weekdayPrice;
-                }
+            }else{
+                totalPrice += weekdayPrice;
             }
         }
         return totalPrice;
@@ -77,6 +74,9 @@ public class Hotel {
     }
 
     private boolean isSpecialDate(Date date) throws ParseException {
+        if (specialDateBegin.isEmpty() || (specialDateEnd.isEmpty())) {
+            return false;
+        }
         Calendar s = Calendar.getInstance();
         s.setTime(date);
         int designatedDateYear;
@@ -86,9 +86,6 @@ public class Hotel {
         Date containsYearSpecialDateEnd;
         containsYearSpecialDateBegin = format.parse(designatedDateYear + "-" + specialDateBegin);
         containsYearSpecialDateEnd = format.parse(designatedDateYear + "-" + specialDateEnd);
-        if (specialDateBegin.isEmpty() || (specialDateEnd.isEmpty())) {
-            return false;
-        }
 
         if (containsYearSpecialDateEnd.after(containsYearSpecialDateBegin)) {
         } else {
@@ -109,11 +106,4 @@ public class Hotel {
         return hotelName;
     }
 
-    public String getSpecialDateBegin() {
-        return specialDateBegin;
-    }
-
-    public String getSpecialDateEnd() {
-        return specialDateEnd;
-    }
 }
