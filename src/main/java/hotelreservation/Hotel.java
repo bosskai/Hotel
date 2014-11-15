@@ -87,9 +87,11 @@ public class Hotel {
         if (!containsYearSpecialDateEnd.after(containsYearSpecialDateBegin)) {
             containsYearSpecialDateEnd = format.parse(designatedDateYear + 1 + "-" + specialDateEnd);
         }
-        boolean isAfterSpecialDateBegin = date.after(containsYearSpecialDateBegin) || date.equals(containsYearSpecialDateBegin);
-        boolean isbeforeSpecialDateEnd = date.before(containsYearSpecialDateEnd) || date.equals(containsYearSpecialDateEnd);
-        if ((isAfterSpecialDateBegin) && (isbeforeSpecialDateEnd)) {
+        boolean isAfterSpecialDateBegin = date.after(containsYearSpecialDateBegin)
+                || date.equals(containsYearSpecialDateBegin);
+        boolean isBeforeSpecialDateEnd = date.before(containsYearSpecialDateEnd)
+                || date.equals(containsYearSpecialDateEnd);
+        if ((isAfterSpecialDateBegin) && (isBeforeSpecialDateEnd)) {
             return true;
         } else {
             return false;
