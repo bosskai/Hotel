@@ -45,7 +45,7 @@ public class Hotel {
         double weekendPrice;
 
         for (Date date : dateList) {
-            if (customerType.equalsIgnoreCase("rewards") && (!isSpecialDate(date))) {
+            if (customerType.equalsIgnoreCase("rewards") && !isSpecialDate(date)) {
                 weekdayPrice = weekdayPriceForRewardsCustomer;
                 weekendPrice = weekendPriceForRewardsCustomer;
             } else {
@@ -53,8 +53,8 @@ public class Hotel {
                 weekendPrice = weekendPriceForRegularCustomer;
             }
             if (isWeekend(date)) {
-                    totalPrice += weekendPrice;
-            }else{
+                totalPrice += weekendPrice;
+            } else {
                 totalPrice += weekdayPrice;
             }
         }
@@ -74,24 +74,22 @@ public class Hotel {
     }
 
     private boolean isSpecialDate(Date date) throws ParseException {
-        if (specialDateBegin.isEmpty() || (specialDateEnd.isEmpty())) {
+        if (specialDateBegin.isEmpty() || specialDateEnd.isEmpty()) {
             return false;
         }
         Calendar s = Calendar.getInstance();
         s.setTime(date);
-        int designatedDateYear;
-        designatedDateYear = s.get(Calendar.YEAR);
+        int designatedDateYear = s.get(Calendar.YEAR);
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        Date containsYearSpecialDateBegin;
-        Date containsYearSpecialDateEnd;
-        containsYearSpecialDateBegin = format.parse(designatedDateYear + "-" + specialDateBegin);
-        containsYearSpecialDateEnd = format.parse(designatedDateYear + "-" + specialDateEnd);
+        Date containsYearSpecialDateBegin = format.parse(designatedDateYear + "-" + specialDateBegin);
+        Date containsYearSpecialDateEnd = format.parse(designatedDateYear + "-" + specialDateEnd);
 
-        if (containsYearSpecialDateEnd.after(containsYearSpecialDateBegin)) {
-        } else {
+        if (!containsYearSpecialDateEnd.after(containsYearSpecialDateBegin)) {
             containsYearSpecialDateEnd = format.parse(designatedDateYear + 1 + "-" + specialDateEnd);
         }
-        if ((date.after(containsYearSpecialDateBegin) || (date.equals(containsYearSpecialDateBegin))) && ((date.before(containsYearSpecialDateEnd)) || (date.equals(containsYearSpecialDateEnd)))) {
+        boolean isAfterSpecialDateBegin = date.after(containsYearSpecialDateBegin) || date.equals(containsYearSpecialDateBegin);
+        boolean isbeforeSpecialDateEnd = date.before(containsYearSpecialDateEnd) || date.equals(containsYearSpecialDateEnd);
+        if ((isAfterSpecialDateBegin) && (isbeforeSpecialDateEnd)) {
             return true;
         } else {
             return false;
