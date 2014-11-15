@@ -43,52 +43,23 @@ public class Hotel {
         double totalPrice = 0;
         double weekdayPrice;
         double weekendPrice;
-        if (specialDateBegin.isEmpty()) {
-            if (customerType.equalsIgnoreCase("rewards")) {
+
+        for (Date date : dateList) {
+            if (customerType.equalsIgnoreCase("rewards") && (!isSpecialDate(date))) {
                 weekdayPrice = weekdayPriceForRewardsCustomer;
                 weekendPrice = weekendPriceForRewardsCustomer;
             } else {
                 weekdayPrice = weekdayPriceForRegularCustomer;
                 weekendPrice = weekendPriceForRegularCustomer;
             }
-            for (Date date : dateList) {
-                if (isWeekend(date)) {
+
+            if (isWeekend(date)) {
+                if (isSpecialDate(date)) {
                     totalPrice += weekendPrice;
                 } else {
                     totalPrice += weekdayPrice;
                 }
             }
-        } else {
-//            if (customerType.equalsIgnoreCase("rewards")) {
-//                weekdayPrice = weekdayPriceForRewardsCustomer;
-//                weekendPrice = weekendPriceForRewardsCustomer;
-//            } else {
-//                weekdayPrice = weekdayPriceForRegularCustomer;
-//                weekendPrice = weekendPriceForRegularCustomer;
-//            }
-            for (Date date : dateList) {
-                if (isSpecialDate(date)) {
-                    weekdayPrice = weekdayPriceForRegularCustomer;
-                    weekendPrice = weekendPriceForRegularCustomer;
-                } else {
-                    if (customerType.equalsIgnoreCase("rewards")) {
-                        weekdayPrice = weekdayPriceForRewardsCustomer;
-                        weekendPrice = weekendPriceForRewardsCustomer;
-                    } else {
-                        weekdayPrice = weekdayPriceForRegularCustomer;
-                        weekendPrice = weekendPriceForRegularCustomer;
-                    }
-                }
-
-                if (isWeekend(date)) {
-                    if (isSpecialDate(date)) {
-                        totalPrice += weekendPrice;
-                    } else {
-                        totalPrice += weekdayPrice;
-                    }
-                }
-            }
-
         }
         return totalPrice;
     }
@@ -108,20 +79,24 @@ public class Hotel {
     private boolean isSpecialDate(Date date) throws ParseException {
         Calendar s = Calendar.getInstance();
         s.setTime(date);
-        int designatedDateYear ;
+        int designatedDateYear;
         designatedDateYear = s.get(Calendar.YEAR);
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Date containsYearSpecialDateBegin;
         Date containsYearSpecialDateEnd;
-        containsYearSpecialDateBegin = format.parse(designatedDateYear+"-"+specialDateBegin);
-        containsYearSpecialDateEnd = format.parse(designatedDateYear+"-"+specialDateEnd);
-        if(containsYearSpecialDateEnd.after(containsYearSpecialDateBegin)){
-        } else {
-            containsYearSpecialDateEnd = format.parse(designatedDateYear+1+"-"+specialDateEnd);
+        containsYearSpecialDateBegin = format.parse(designatedDateYear + "-" + specialDateBegin);
+        containsYearSpecialDateEnd = format.parse(designatedDateYear + "-" + specialDateEnd);
+        if (specialDateBegin.isEmpty() || (specialDateEnd.isEmpty())) {
+            return false;
         }
-        if((date.after(containsYearSpecialDateBegin)||(date.equals(containsYearSpecialDateBegin)))&&((date.before(containsYearSpecialDateEnd))||(date.equals(containsYearSpecialDateEnd)))){
+
+        if (containsYearSpecialDateEnd.after(containsYearSpecialDateBegin)) {
+        } else {
+            containsYearSpecialDateEnd = format.parse(designatedDateYear + 1 + "-" + specialDateEnd);
+        }
+        if ((date.after(containsYearSpecialDateBegin) || (date.equals(containsYearSpecialDateBegin))) && ((date.before(containsYearSpecialDateEnd)) || (date.equals(containsYearSpecialDateEnd)))) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
