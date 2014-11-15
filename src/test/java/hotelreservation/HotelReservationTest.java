@@ -53,7 +53,7 @@ public class HotelReservationTest {
     public void total_price_should_be_regular_when_date_is_out_of_valid() throws Exception {
         String dateString = "2009-03-01";
         Hotel lakeWood = new Hotel("LakeWood", 3, 110, 80, 90, 80, "03-01", "03-20");
-        Double expect = Double.valueOf(110);
+        double expect = Double.valueOf(90);
         assertTrue(expect == lakeWood.calculatePrice(hotelReservation.parseDate(dateString), "rewards"));
     }
 
