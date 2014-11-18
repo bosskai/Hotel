@@ -11,7 +11,7 @@ import java.util.*;
 public class HotelReservation {
     protected List<Hotel> hotelList;
 
-    public String bestChoice(final String date) throws Exception {
+    public HotelReservation() {
         hotelList = new ArrayList<Hotel>();
         Hotel lakeWood = new Hotel("LakeWood", 3, 110, 80, 90, 80);
         Hotel bridgeWood = new Hotel("BridgeWood", 4, 160, 110, 60, 50);
@@ -19,14 +19,15 @@ public class HotelReservation {
         hotelList.add(lakeWood);
         hotelList.add(bridgeWood);
         hotelList.add(ridgeWood);
+    }
 
-        String[] Array = date.split(":");
-        String customerType = "";
-        String needToFormatDate = null;
-        for (String dateString : Array) {
-            customerType = Array[0];
-            needToFormatDate = Array[1];
-        }
+    public String bestChoice(final String date) throws Exception {
+
+        String dateFormat = date.replace(" ", "");
+
+        String[] Array = dateFormat.split(":");
+        String customerType = customerType = Array[0];
+        String needToFormatDate = needToFormatDate = Array[1];
 
         final List<Date> listDate = parseDate(needToFormatDate);
 
@@ -65,30 +66,10 @@ public class HotelReservation {
     protected List<Date> parseDate(String date) throws ParseException {
         List<Date> listDate = new ArrayList<Date>();
         String[] dateArray = date.split(",");
-//        Date dateFormatAfter;
         DateFormat format = new SimpleDateFormat("ddMMMyyyy", Locale.ENGLISH);
         for (String dateString : dateArray) {
-//            dateFormatAfter = format.parse(stringFormat(dateString,"("));
-            listDate.add(format.parse(stringFormat(dateString, "(")));
+            listDate.add(format.parse(dateString.split("\\(")[0]));
         }
         return listDate;
     }
-
-
-    private String stringFormat(String original, String regex1) {
-        int separatorID = 0;
-        char[] chars = original.toCharArray();
-        int step = chars.length;
-        char splitter1 = regex1.toCharArray()[0];
-        for (int i = 0; i < step; i++) {
-            if (chars[i] == splitter1) {
-                separatorID = i;
-            }
-        }
-        String afterFormat = "";
-        afterFormat = original.substring(0, separatorID);
-        return afterFormat;
-
-    }
-
 }
