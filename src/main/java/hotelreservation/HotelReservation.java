@@ -26,8 +26,8 @@ public class HotelReservation {
         String dateFormat = date.replace(" ", "");
 
         String[] Array = dateFormat.split(":");
-        String customerType = customerType = Array[0];
-        String needToFormatDate = needToFormatDate = Array[1];
+        String customerType = Array[0];
+        String needToFormatDate =  Array[1];
 
         final List<Date> listDate = parseDate(needToFormatDate);
 

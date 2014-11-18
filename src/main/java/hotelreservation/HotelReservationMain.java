@@ -13,7 +13,7 @@ public class HotelReservationMain {
             InputStreamReader read = new InputStreamReader(
                     new FileInputStream(file), encoding);
             BufferedReader bufferedReader = new BufferedReader(read);
-            String lineTxt = null;
+            String lineTxt;
             while ((lineTxt = bufferedReader.readLine()) != null) {
                 HotelReservation hotelReservation = new HotelReservation();
                 System.out.println("Name of the cheapest hotel:" + hotelReservation.bestChoice(lineTxt));
