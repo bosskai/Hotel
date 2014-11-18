@@ -1,5 +1,6 @@
 package hotelreservation;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -8,11 +9,29 @@ import java.util.*;
  * Created by bosskai on 2014/11/13.
  */
 public class HotelReservation {
+    protected List<Hotel> hotelList;
 
-    public String bestChoice(List<Hotel> hotelList, final String date, final String customerType) throws Exception {
+    public String bestChoice( final String date) throws Exception {
+        hotelList = new ArrayList<Hotel>();
+        Hotel lakeWood = new Hotel("LakeWood", 3, 110, 80, 90, 80);
+        Hotel bridgeWood = new Hotel("BridgeWood", 4, 160, 110, 60, 50);
+        Hotel ridgeWood = new Hotel("RidgeWood", 5, 220, 100, 150, 40);
+        hotelList.add(lakeWood);
+        hotelList.add(bridgeWood);
+        hotelList.add(ridgeWood);
 
-        final List<Date> listDate = parseDate(date);
+        String[] Array =  date.split(":");
+        String customerType = "";
+        String needToFormatDate = null;
+        for(String dateString : Array){
+            customerType = Array[0];
+            needToFormatDate = Array[1];
+        }
 
+        final List<Date> listDate = parseDate(needToFormatDate);
+
+
+        final String finalCustomerType = customerType;
         Collections.sort(hotelList, new Comparator() {
             @Override
             public int compare(Object o1, Object o2) {
@@ -21,8 +40,8 @@ public class HotelReservation {
                 Double totalPrice1 = null;
                 Double totalPrice2 = null;
                 try {
-                    totalPrice1 = hotel1.calculatePrice(listDate, customerType);
-                    totalPrice2 = hotel2.calculatePrice(listDate, customerType);
+                    totalPrice1 = hotel1.calculatePrice(listDate, finalCustomerType);
+                    totalPrice2 = hotel2.calculatePrice(listDate, finalCustomerType);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -45,12 +64,34 @@ public class HotelReservation {
 
     protected List<Date> parseDate(String date) throws ParseException {
         List<Date> listDate = new ArrayList<Date>();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         String[] dateArray = date.split(",");
+//        Date dateFormatAfter;
+        DateFormat format = new SimpleDateFormat("ddMMMyyyy", Locale.ENGLISH);
         for (String dateString : dateArray) {
-            listDate.add(format.parse(dateString));
+//            dateFormatAfter = format.parse(stringFormat(dateString,"("));
+            listDate.add(format.parse(stringFormat(dateString,"(")));
         }
         return listDate;
+    }
+
+
+
+    private  String stringFormat(String original,String regex1)
+    {
+        int separatorID = 0;
+        char [] chars = original.toCharArray();
+        int step=chars.length;
+        char splitter1=regex1.toCharArray()[0];
+        for (int i=0;i<step;i++){
+            if(chars[i]==splitter1)
+            {
+                separatorID = i;
+            }
+        }
+        String afterFormat = "";
+        afterFormat = original.substring(0,separatorID);
+        return afterFormat;
+
     }
 
 }
